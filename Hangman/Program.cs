@@ -49,8 +49,6 @@ namespace Hangman
             List<char> MovieWordRandom = movieWord.ElementAt(rand.Next(movieWord.Count)).ToList<char>(); //Gets a random word from the word list.
 
 
-
-
             using (StreamReader srGames = new StreamReader(GetFileLocGames.GamePath))
             {
                 while (!srGames.EndOfStream)
@@ -61,7 +59,6 @@ namespace Hangman
 
 
             List<char> GameWordRandom = gameWord.ElementAt(rand.Next(gameWord.Count)).ToList<char>(); // Gets a random word from the word list.
-
 
 
             void ChooseCategory(out int chosen)
@@ -85,7 +82,7 @@ namespace Hangman
                     {
                         Console.WriteLine("You've chosen category Movies");
 
-                        HideTheWord(GameWordRandom);
+                        HideTheWord(MovieWordRandom);
 
                         chosen = 2;
                         CategoryChosen = chosen;
@@ -267,7 +264,7 @@ namespace Hangman
                                         {
                                             Console.WriteLine("Game Over!");
                                             Console.WriteLine("\nThe word was ");
-                                            foreach (var a in GameWordRandom)
+                                            foreach (var a in MovieWordRandom)
                                             {
                                                 Console.Write(a);
                                             }
