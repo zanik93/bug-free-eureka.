@@ -49,6 +49,8 @@ namespace Hangman
             List<char> MovieWordRandom = movieWord.ElementAt(rand.Next(movieWord.Count)).ToList<char>(); //Gets a random word from the word list.
 
 
+
+
             using (StreamReader srGames = new StreamReader(GetFileLocGames.GamePath))
             {
                 while (!srGames.EndOfStream)
@@ -180,7 +182,7 @@ namespace Hangman
                     playerGuesses.Clear();
                     guessedWord.Clear();
                     incorrectGuesses = 0;
-
+                    
                     ChooseCategory(out CategoryChosen);
 
                 }
@@ -222,9 +224,14 @@ namespace Hangman
                                         incorrectGuesses++;
                                         Console.WriteLine("Your incorrect guesses so far are " + incorrectGuesses);
 
-                                        if (incorrectGuesses == 2)
+                                        if (incorrectGuesses == 10)
                                         {
                                             Console.WriteLine("Game Over!");
+                                            Console.WriteLine("\nThe word was ");
+                                            foreach(var a in GameWordRandom)
+                                            {
+                                                Console.Write(a);
+                                            }
                                             DoYouWishToContinueIfOver();
 
                                         }
@@ -259,6 +266,11 @@ namespace Hangman
                                         if (incorrectGuesses == 10)
                                         {
                                             Console.WriteLine("Game Over!");
+                                            Console.WriteLine("\nThe word was ");
+                                            foreach (var a in GameWordRandom)
+                                            {
+                                                Console.Write(a);
+                                            }
                                             DoYouWishToContinueIfOver();
                                         }
                                     }
