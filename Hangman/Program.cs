@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Categories;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
-using Categories;
+using System.Threading.Tasks;
 
 namespace Hangman
 {
@@ -234,11 +234,11 @@ namespace Hangman
                                     else
                                     {
                                         incorrectGuesses++;
-                                        Thread.Sleep(650);
-                                        Console.WriteLine("Your incorrect guesses so far are " + incorrectGuesses);
                                         
+                                        Console.WriteLine("Your incorrect guesses so far are " + incorrectGuesses);
+                                        Task.Delay(1000).Wait();
 
-                                        if (incorrectGuesses == 10)
+                                    if (incorrectGuesses == 10)
                                         {
                                             Console.WriteLine("Game Over!");
                                             Console.WriteLine("\nThe word was ");
@@ -255,9 +255,9 @@ namespace Hangman
                                 }
                                 else
                                 {
-                                    Thread.Sleep(650);
-                                    Console.WriteLine(Environment.NewLine + "You have already guessed that letter");
                                     
+                                    Console.WriteLine(Environment.NewLine + "You have already guessed that letter");
+                                    Task.Delay(1000).Wait();
                                 }
                             }
                             else
@@ -278,8 +278,8 @@ namespace Hangman
                                     else
                                     {
                                         incorrectGuesses++;
-                                        Thread.Sleep(650);
                                         Console.WriteLine("Your incorrect guesses so far are " + incorrectGuesses);
+                                        Task.Delay(1000).Wait();
                                         if (incorrectGuesses == 10)
                                         {
                                             Console.WriteLine("Game Over!");
@@ -294,8 +294,9 @@ namespace Hangman
                                 }
                                 else
                                 {
-                                    Thread.Sleep(650);
+                                    
                                     Console.WriteLine("You have already guessed that letter");
+                                    Task.Delay(1000).Wait();
                                 }
                             }
 
