@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Categories;
 
 namespace Hangman
@@ -32,7 +33,10 @@ namespace Hangman
 
 
             List<string> movieWord = new List<string>();
+            List<char> MovieWordRandom = new List<char>();
+
             List<string> gameWord = new List<string>();
+            List<char> GameWordRandom = new List<char>();
 
 
 
@@ -46,7 +50,7 @@ namespace Hangman
                 }
             }
 
-            List<char> MovieWordRandom = movieWord.ElementAt(rand.Next(movieWord.Count)).ToList<char>(); //Gets a random word from the word list.
+            
 
 
             using (StreamReader srGames = new StreamReader(GetFileLocGames.GamePath))
@@ -58,7 +62,7 @@ namespace Hangman
             }
 
 
-            List<char> GameWordRandom = gameWord.ElementAt(rand.Next(gameWord.Count)).ToList<char>(); // Gets a random word from the word list.
+             
 
 
             void ChooseCategory(out int chosen)
@@ -72,6 +76,8 @@ namespace Hangman
                     {
                         Console.WriteLine("You've chosen category Games");
 
+                        GameWordRandom = gameWord.ElementAt(rand.Next(gameWord.Count)).ToList<char>(); // Gets a random word from the word list.
+
                         HideTheWord(GameWordRandom);
 
 
@@ -81,6 +87,8 @@ namespace Hangman
                     else if (CategoryChosing == "MOVIES")
                     {
                         Console.WriteLine("You've chosen category Movies");
+
+                        MovieWordRandom = movieWord.ElementAt(rand.Next(movieWord.Count)).ToList<char>(); //Gets a random word from the word list.
 
                         HideTheWord(MovieWordRandom);
 
@@ -97,6 +105,8 @@ namespace Hangman
                         {
                             Console.WriteLine("You've chosen category Games");
 
+                            GameWordRandom = gameWord.ElementAt(rand.Next(gameWord.Count)).ToList<char>();
+
                             HideTheWord(GameWordRandom);
 
 
@@ -106,6 +116,8 @@ namespace Hangman
                         else if (CategoryChosing == "MOVIES")
                         {
                             Console.WriteLine("You've chosen category Movies");
+
+                            MovieWordRandom = movieWord.ElementAt(rand.Next(movieWord.Count)).ToList<char>();
 
                             HideTheWord(MovieWordRandom);
 
@@ -154,6 +166,7 @@ namespace Hangman
                             restartFlag = true;
                             NewGame();
                             TheGame();
+                            
                         }
                         else if (playerInput == "N")
                         {
@@ -179,6 +192,8 @@ namespace Hangman
                     playerGuesses.Clear();
                     guessedWord.Clear();
                     incorrectGuesses = 0;
+
+                    
                     
                     ChooseCategory(out CategoryChosen);
 
@@ -219,7 +234,9 @@ namespace Hangman
                                     else
                                     {
                                         incorrectGuesses++;
+                                        Thread.Sleep(650);
                                         Console.WriteLine("Your incorrect guesses so far are " + incorrectGuesses);
+                                        
 
                                         if (incorrectGuesses == 10)
                                         {
@@ -238,7 +255,9 @@ namespace Hangman
                                 }
                                 else
                                 {
-                                    Console.WriteLine("You have already guessed that letter");
+                                    Thread.Sleep(650);
+                                    Console.WriteLine(Environment.NewLine + "You have already guessed that letter");
+                                    
                                 }
                             }
                             else
@@ -259,6 +278,7 @@ namespace Hangman
                                     else
                                     {
                                         incorrectGuesses++;
+                                        Thread.Sleep(650);
                                         Console.WriteLine("Your incorrect guesses so far are " + incorrectGuesses);
                                         if (incorrectGuesses == 10)
                                         {
@@ -274,6 +294,7 @@ namespace Hangman
                                 }
                                 else
                                 {
+                                    Thread.Sleep(650);
                                     Console.WriteLine("You have already guessed that letter");
                                 }
                             }
@@ -281,7 +302,14 @@ namespace Hangman
 
                         }
                     }
-                }
+
+                    Console.Clear();
+                    GameEngine.printWord(guessedWord);
+
+                    Console.WriteLine("\nCongratulations, you win!");
+
+                    DoYouWishToContinueIfOver();
+            }
 
              NewGame();
              TheGame();
@@ -290,13 +318,13 @@ namespace Hangman
 
 
 
-                Console.Clear();
-                GameEngine.printWord(guessedWord);
+                //Console.Clear();
+                //GameEngine.printWord(guessedWord);
 
-                Console.WriteLine("\nCongratulations, you win!");
+                //Console.WriteLine("\nCongratulations, you win!");
 
 
-                DoYouWishToContinueIfOver();
+                
 
 
             }
