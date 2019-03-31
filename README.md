@@ -1,2 +1,2 @@
 # bug-free-eureka.
-Internship Hangman console game
+Please ignore the 'ugly' code as I had to follow rules regarding different language.
